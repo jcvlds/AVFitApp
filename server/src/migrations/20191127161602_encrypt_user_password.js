@@ -9,7 +9,9 @@ exports.up = async function up (knex) {
   await Promise.all(users.map(convertPassword))
   await knex.schema.table('users', t => {
     t.dropColumn('password')
-  }); function convertPassword (user) {
+  })
+
+  function convertPassword (user) {
     const { salt, hash } = saltHashPassword(user.password)
     return knex('users')
       .where({ id: user.id })

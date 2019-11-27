@@ -32,7 +32,9 @@ module.exports = {
       })
     }
   }
-}; function saltHashPassword (password) {
+}
+
+function saltHashPassword (password) {
   const salt = randomString()
   const hash = crypto
     .createHmac('sha512', salt)
@@ -41,6 +43,8 @@ module.exports = {
     salt,
     hash: hash.digest('hex')
   }
-}; function randomString () {
+};
+
+function randomString () {
   return crypto.randomBytes(4).toString('hex')
 }
