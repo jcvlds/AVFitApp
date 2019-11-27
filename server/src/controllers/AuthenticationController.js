@@ -9,7 +9,7 @@ module.exports = {
     const password = req.body.password
     console.log(`Add user ${req.body.username} with password ${req.body.password}`)
 
-    const { salt, hash } = saltHashPassword(password)
+    const { salt, hash } = saltHashPassword({ password })
 
     try {
       return knex('users').insert({
@@ -17,14 +17,43 @@ module.exports = {
         encrypted_password: hash,
         username,
         email
-      }).then(() => {
-        res.status(200).send({
-          username: req.body.username,
-          email: req.body.email,
-          password: req.body.password,
-          message: 'Created user!'
+      }).debug()
+        .then(() => {
+          res.status(200).send({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            message: 'Created user!'
+          })
         })
+    } catch (err) {
+      console.log(err)
+      res.status(500).send({
+        message: 'Error: err'
       })
+    }
+  },
+  async authenticate (req, res) {
+    console.log(`Authenticating ${req.body.username}`)
+    const { username, password } = req.body
+    try {
+      return knex('users').where({ username }).debug()
+        .then(([user]) => {
+          if (!user) {
+            res.status(401).send({
+              message: 'Username not found'
+            })
+          } else {
+            const { hash } = saltHashPassword({
+              password,
+              salt: user.salt
+            })
+            res.status(200).send({
+              success: hash === user.encrypted_password,
+              message: `Hello ${user.username}! You are logged in!`
+            })
+          }
+        })
     } catch (err) {
       console.log(err)
       res.status(500).send({
@@ -34,8 +63,10 @@ module.exports = {
   }
 }
 
-function saltHashPassword (password) {
-  const salt = randomString()
+function saltHashPassword ({
+  password,
+  salt = randomString()
+}) {
   const hash = crypto
     .createHmac('sha512', salt)
     .update(password)
