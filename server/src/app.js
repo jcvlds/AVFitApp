@@ -1,4 +1,4 @@
-console.log('hello')
+console.log('initializing server')
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
@@ -15,10 +15,9 @@ app.get('/status', (req, res) => {
   })
 })
 
-app.post('/register', (req, res) => {
-  res.send({
-    message: `Hello ${req.body.email}! Your user was registered! Have Fun!`
-  })
-})
+require('./routes')(app)
 
-app.listen(process.env.PORT || 8081)
+app.set('port', process.env.PORT || 8081)
+const server = app.listen(app.get('port'), () => {
+  console.log(`server started on ${server.address().port}`)
+})
