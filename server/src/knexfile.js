@@ -16,6 +16,9 @@ module.exports =  {
       password: 'password',
       database: 'av_fit_app'
     },
+    pool: {
+      min: 2, max: 5
+    },
     migrations: {
       directory: __dirname + '/db/migrations'
     },
@@ -32,6 +35,9 @@ module.exports =  {
       password: 'password',
       database: 'av_fit_app'
     },
+    pool: {
+      min: 2, max: 5
+    },
     migrations: {
       directory: __dirname + '/db/migrations'
     },
@@ -42,6 +48,10 @@ module.exports =  {
   production: {
     client: 'mysql',
     connection: process.env.DATABASE_URL,
+    pool: {
+      min: 2, max: 5
+    },
+    acquireConnectionTimeout: 10000,
     migrations: {
       directory: __dirname + '/db/migrations'
     },

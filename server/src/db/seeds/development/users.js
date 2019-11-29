@@ -1,5 +1,5 @@
 
-exports.seed = async function(knex) {
+exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex.schema.table('users', t => {
     // t.string('salt').notNullable()
@@ -12,9 +12,9 @@ exports.seed = async function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('users').insert([
-        {username: 'jcuser', email: 'jcuser@gmail.com', password: parseInt('123456')},
-        {username: 'anauser', email: 'anauser@gmail.com', password: parseInt('123456')},
-        {username: 'check', email: 'check@gmail.com', password: parseInt('123456')}
-      ]);
-    });
-};
+        { username: 'jcuser', email: 'jcuser@gmail.com', password: parseInt('123456') },
+        { username: 'anauser', email: 'anauser@gmail.com', password: parseInt('123456') },
+        { username: 'check', email: 'check@gmail.com', password: parseInt('123456') }
+      ])
+    })
+}
