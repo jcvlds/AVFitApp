@@ -9,7 +9,7 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-require('./db')
+// require('./db/db')
 
 require('./routes')(app)
 

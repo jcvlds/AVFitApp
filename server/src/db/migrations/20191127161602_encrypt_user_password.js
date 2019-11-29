@@ -4,6 +4,7 @@ exports.up = async function up (knex) {
   await knex.schema.table('users', t => {
     // t.string('salt').notNullable()
     // t.string('encrypted_password').notNullable()
+    t.string('password').notNullable()
   })
   const users = await knex('users')
   await Promise.all(users.map(convertPassword))

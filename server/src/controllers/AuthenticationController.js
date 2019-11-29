@@ -1,5 +1,6 @@
 const crypto = require('crypto')
-const knex = require('knex')(require('./../knexfile'))
+// const knex = require('knex')(require('./../knexfile').development)
+const knex = require('../knex')
 module.exports = {
   // async registerUser ({ username, password }) {
   saltHashPassword,
