@@ -2,62 +2,59 @@
 <template>
   <q-page class="flex flex-center">
     <!-- <img alt="Quasar logo" src="~assets/quasar-logo-full.svg" /> -->
-    <h5>Register</h5>
+    <h5>Login</h5>
 
-    <input
+    <!-- <input
       type="text"
       name="username"
       placeholder="username"
       v-model="username" />
-		<br />
-    <input
-      type="email"
-      name="email"
-      placeholder="email"
-      v-model="email" />
 		<br />
 		<input
       type="password"
       name="password"
       placeholder="password"
       v-model="password" />
-		<br />
-		<input
-      type="password"
-      name="repeat_password"
-      placeholder="repeat password"
-      v-model="repeat_password" />
-		<br />
-    <div class="error" v-html="error" />
-		<button
-      @click="register">
-      Register
-    </button>
+		<br /> -->
+      <h5>Login</h5>
+        <form>
+          <q-text-field
+          label="Username"
+          v-model="username"
+          ></q-text-field>
+        </form>
+    <div class="danger-alert" v-html="error" />
+    <q-button
+      dark
+      class="primary"
+      @click="login">
+      Login
+    </q-button>
+		<!-- <button
+      @click="login">
+      Login
+    </button> -->
   </q-page>
 </template>
 
 <script>
 import AuthenticationService from "../services/AuthenticationService";
 export default {
-  name: "Register",
+  name: "Login",
   data() {
     return {
       username: "",
-      email: "abc",
-      password: "123",
-      repeat_password: "",
+      password: "",
       error: null
     };
   },
   methods: {
-    async register () {
+    async login () {
       try {
-        console.log("register button was clicked", this.password);
-        const response = await AuthenticationService.registerUser({
+        console.log("login button was clicked", this.username, this.password);
+        const response = await AuthenticationService.login({
         username: this.username,
-        email: this.email,
-        password: this.password,
-        repeat_password: this.repeat_password
+        password: this.password
         })
         console.log(response.data);
       } catch (error ) {
@@ -70,3 +67,6 @@ export default {
 }
 }
 </script>
+
+<style scoped>
+</style>

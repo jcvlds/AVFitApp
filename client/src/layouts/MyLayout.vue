@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
@@ -12,7 +13,7 @@
           class="text-accent"
         />
         <q-avatar>
-          <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
+          <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
         </q-avatar>
 
         <q-toolbar-title class="text-accent">
