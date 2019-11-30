@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
+const config = require('./config/config')
 
 const app = express()
 app.use(morgan('combined'))
@@ -13,7 +14,7 @@ app.use(cors())
 
 require('./routes')(app)
 
-app.set('port', process.env.PORT || 8081)
+app.set('port', config.port)
 const server = app.listen(app.get('port'), () => {
   console.log(`server started on ${server.address().port}`)
 })

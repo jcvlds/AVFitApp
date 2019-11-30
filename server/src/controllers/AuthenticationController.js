@@ -1,13 +1,20 @@
 const crypto = require('crypto')
 // const knex = require('knex')(require('./../knexfile').development)
 const knex = require('../knex')
+const jwt = require('jsonwebtoken')
+const config = require('../config/config')
+
+function jwtSignUser (user) {
+  const ONE_WEEK = 60 * 60 * 24 * 7
+  return jwt.sign(user, config.authentication.jwtSecret, {
+    expiresIn: ONE_WEEK
+  })
+}
+
 module.exports = {
   // async registerUser ({ username, password }) {
   saltHashPassword,
   async registerUser (req, res) {
-    // const username = req.body.username
-    // const email = req.body.email
-    // const password = req.body.password
     const { username, email, password } = req.body
     // console.log(`Add user ${req.body.username} with password ${req.body.password}`)
 
@@ -62,7 +69,7 @@ module.exports = {
                       // email: req.body.email,
                       // password: req.body.password,
                         user: user,
-                        token: '',
+                        token: jwtSignUser({ user }),
                         message: 'Registered user successfully!'
                       })
                     }
@@ -105,7 +112,7 @@ module.exports = {
                   username: user.username,
                   email: user.email
                 },
-                token: '',
+                token: jwtSignUser({ user }),
                 message: `Hello ${user.username}! You are logged in!`
               })
             }
