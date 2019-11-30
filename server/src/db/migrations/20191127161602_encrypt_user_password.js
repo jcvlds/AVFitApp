@@ -1,10 +1,10 @@
-const { saltHashPassword } = require('../controllers/AuthenticationController')
+const { saltHashPassword } = require('./../../controllers/AuthenticationController')
 
 exports.up = async function up (knex) {
   await knex.schema.table('users', t => {
-    // t.string('salt').notNullable()
-    // t.string('encrypted_password').notNullable()
-    t.string('password').notNullable()
+    t.string('salt').notNullable()
+    t.string('encrypted_password').notNullable()
+    // t.string('password').notNullable()
   })
   const users = await knex('users')
   await Promise.all(users.map(convertPassword))
@@ -13,7 +13,7 @@ exports.up = async function up (knex) {
   })
 
   function convertPassword (user) {
-    const { salt, hash } = saltHashPassword(user.password)
+    const { salt, hash } = saltHashPassword({ password: user.password })
     return knex('users')
       .where({ id: user.id })
       .update({
@@ -27,6 +27,6 @@ exports.down = function (knex) {
   return knex.schema.table('users', t => {
     t.dropColumn('salt')
     t.dropColumn('encrypted_password')
-    t.string('password').notNullable()
+    // t.string('password').notNullable()
   })
 }

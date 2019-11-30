@@ -25,7 +25,7 @@ module.exports = {
       switch (error.details[0].context.key) {
         case 'username':
           res.status(400).send({
-            error: 'You must provide a valid username'
+            error: 'You must provide a valid username with at least 5 characters'
           })
           break
         case 'email':

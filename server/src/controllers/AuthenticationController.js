@@ -5,53 +5,75 @@ module.exports = {
   // async registerUser ({ username, password }) {
   saltHashPassword,
   async registerUser (req, res) {
-    const username = req.body.username
-    const email = req.body.email
-    const password = req.body.password
-    console.log(`Add user ${req.body.username} with password ${req.body.password}`)
+    // const username = req.body.username
+    // const email = req.body.email
+    // const password = req.body.password
+    const { username, email, password } = req.body
+    // console.log(`Add user ${req.body.username} with password ${req.body.password}`)
 
     const { salt, hash } = saltHashPassword({ password })
 
     try {
       return knex('users')
-        // .returning(['username', 'email', 'password', 'updated_at', 'created_at'])
-        .returning('id')
-        .insert({
-          salt,
-          encrypted_password: hash,
-          username,
-          email
+        .select({
+          username: 'users.username',
+          email: 'users.email'
         })
-      // .debug()
-        .then((id) => {
-          return knex('users')
-            .select({
-              id: 'users.id',
-              username: 'users.username',
-              email: 'users.email'
-            })
-            .where({ id })
-            .then(([user]) => {
-              if (!user) {
-                res.status(401).send({
-                  error: 'User was not created successfully'
-                })
-              } else {
-                res.status(200).send({
-                // username: req.body.username,
-                // email: req.body.email,
-                // password: req.body.password,
-                  user: user,
-                  token: '',
-                  message: 'Registered user successfully!'
-                })
-              }
-            })
+        .where({ username })
+        .orWhere({ email })
+        .then(([user]) => {
+          if (user) {
+            if (user.username === username) {
+              res.status(401).send({
+                error: `Username: ${user.username} already exists`
+              })
+            } else if (user.email === email) {
+              res.status(401).send({
+                error: `Email: ${user.email} already exists`
+              })
+            }
+          } else if (!user) {
+            return knex('users')
+            // .returning(['username', 'email', 'password', 'updated_at', 'created_at'])
+              .returning('id')
+              .insert({
+                salt,
+                encrypted_password: hash,
+                username,
+                email
+              })
+            // .debug()
+              .then((id) => {
+                return knex('users')
+                  .select({
+                    id: 'users.id',
+                    username: 'users.username',
+                    email: 'users.email'
+                  })
+                  .where({ id, username })
+                  .then(([user]) => {
+                    if (!user) {
+                      res.status(401).send({
+                        error: 'User was not created successfully'
+                      })
+                    } else {
+                      res.status(200).send({
+                      // username: req.body.username,
+                      // email: req.body.email,
+                      // password: req.body.password,
+                        user: user,
+                        token: '',
+                        message: 'Registered user successfully!'
+                      })
+                    }
+                  })
+              })
+          }
         })
     } catch (err) {
       console.log(err)
       res.status(500).send({
-        message: 'Error: err'
+        error: 'Error: err'
       })
     }
   },

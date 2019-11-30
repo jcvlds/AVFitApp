@@ -8,7 +8,7 @@ async function run () {
 
   await knexMigrate('up',
     {
-      only: '20191129124057',
+      only: '20191127161602',
       // knexfile: path.dirname('./knex')
       migrations: path.dirname('./db/migrations/20191127161602_encrypt_user_password')
     }, log)
