@@ -38,6 +38,7 @@ module.exports =  {
     pool: {
       min: 2, max: 5
     },
+    debug: true,
     migrations: {
       directory: __dirname + '/db/migrations'
     },
