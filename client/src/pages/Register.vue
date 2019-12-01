@@ -61,12 +61,12 @@ export default {
         })
         console.log(response.data);
       } catch (error ) {
-        // this.error = error.response.data.error
+        // this.error = error.response.data.error;
         this.error = error.response.data.error
       }
-  },
+    },
   // watch: {
-  //   }
+  // }
 }
 }
 </script>

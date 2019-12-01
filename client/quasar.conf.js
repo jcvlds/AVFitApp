@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
@@ -7,7 +8,15 @@ module.exports = function (ctx) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
-      'axios'
+      'axios',
+      {
+        server: false, // run on client-side only!
+        path: 'vuex-router-sync' // references /src/boot/<name>.js
+      },
+      {
+        client: false, // run on server-side only!
+        path: 'vuex-router-sync' // references /src/boot/<name>.js
+      }
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
