@@ -1,38 +1,16 @@
 /* eslint-disable */
 <template>
-  <q-page class="flex flex-center">
-    <!-- <img alt="Quasar logo" src="~assets/quasar-logo-full.svg" /> -->
-    <h5>Register</h5>
+  <q-page class="">
+    <h5 class="text-accent">Register</h5>
+    <q-form @submit="login" class="q-gutter-md text-center">
+      <q-input class="" rounded outlined v-model="username" placeholder="Username" dense type="text" />
+      <q-input class="" rounded outlined v-model="email" placeholder="Email" dense type="text" />
+      <q-input class="" rounded outlined v-model="password" placeholder="Password" dense type="password" />
+      <q-input class="" rounded outlined v-model="repeat_password" placeholder="Repeat Password" dense type="password" />
+      <q-btn type="submit" :loading="loading1" icon="person_add" outline rounded color="accent" label="Register" class="q-px-lg shadow-2"/>
+    </q-form>
 
-    <input
-      type="text"
-      name="username"
-      placeholder="username"
-      v-model="username" />
-		<br />
-    <input
-      type="email"
-      name="email"
-      placeholder="email"
-      v-model="email" />
-		<br />
-		<input
-      type="password"
-      name="password"
-      placeholder="password"
-      v-model="password" />
-		<br />
-		<input
-      type="password"
-      name="repeat_password"
-      placeholder="repeat password"
-      v-model="repeat_password" />
-		<br />
     <div class="error" v-html="error" />
-		<button
-      @click="register">
-      Register
-    </button>
   </q-page>
 </template>
 
@@ -43,8 +21,8 @@ export default {
   data() {
     return {
       username: "",
-      email: "abc",
-      password: "123",
+      email: "",
+      password: "",
       repeat_password: "",
       error: null
     };
@@ -64,9 +42,7 @@ export default {
         // this.error = error.response.data.error;
         this.error = error.response.data.error
       }
-    },
-  // watch: {
-  // }
-}
+    }
+  }
 }
 </script>

@@ -1,57 +1,17 @@
 /* eslint-disable */
 <template>
-  <!-- <q-page class="fixed-center"> -->
-  <q-page class="flex-center column justify-start">
-    <!-- <img alt="Quasar logo" src="~assets/quasar-logo-full.svg" /> -->
-
-      <div class="text-center" style="max-width: 200px">
-        <h5 class="text-center text-accent">Login</h5>
-        <q-form @submit="login" class="q-gutter-md text-center">
-        <!-- <div style="max-width: 200px"> -->
+  <q-page class="fit column justify-start items-center">
+      <div class="col-9 text-center" style="overflow: auto;min-width: 200px; max-width: 200px;">
+        <!-- <h5 class="text-center text-accent">Login</h5> -->
+        <h5 class="text-accent">Login</h5>
+        <q-form @submit="login" class="q-gutter-md">
           <q-input class="" rounded outlined v-model="username" placeholder="Username" dense />
-        <!-- </div> -->
-          <!-- <div> -->
-            <q-btn type="submit" :loading="loading1" icon="exit_to_app" outline rounded color="accent" label="Login" class="q-px-lg shadow-2"/>
-          <!-- </div> -->
-         </q-form>
+          <q-input class="" rounded outlined v-model="password" placeholder="Password" dense type="password" />
+          <q-btn type="submit" :loading="loading1" icon="exit_to_app" outline rounded color="accent" label="Login" class="q-px-lg shadow-2"/>
+        </q-form>
       </div>
-        <!-- <input
-          type="text"
-          class="text-center rounded-borders"
-          name="username"
-          placeholder="username"
-          v-model="username" /> -->
-        <br />
-        <input
-          type="password"
-          class="text-center q-mt-xs rounded-borders"
-          name="password"
-          placeholder="password"
-          v-model="password" />
-        <!-- <q-text-field
-        label="Username"
-        v-model="username"
-        ></q-text-field> -->
-      <!-- </form> -->
-      <br />
       <div v-show="error" class="text-red text-center block q-mt-sm">
         {{ error }}
-      </div>
-    <!-- <q-button
-      dark
-      class="primary"
-      @click="login">
-      Login
-    </q-button> -->
-      <div class="text-center">
-        <!-- <button
-          class="q-mt-sm q-py-xs bg-primary q-px-xl shadow-2 rounded-borders cursor-pointer"
-          @click="login">
-          Login
-        </button> -->
-        <q-btn :loading="loading1" icon="exit_to_app" outline rounded color="accent" label="Login" class="q-px-lg shadow-2" @click="login" />
-        <!-- <q-btn icon="power_settings_new" />
-        <q-btn icon="person_add" /> -->
       </div>
   </q-page>
 </template>
@@ -78,20 +38,25 @@ export default {
         username: this.username,
         password: this.password
         })
-        console.log(response.data);
-        // console.log(response.data.token)
-        // this.$store.dispatch('login/setToken', { token: response.data.token })
-        this.$store.dispatch('login/setUser', response.data.user)
+        // console.log(response.data);
+        this.$store.dispatch('setToken', { token: response.data.token })
+        this.$store.dispatch('setUser', response.data.user.username)
         this.loading1 = false
+        this.$router.push({
+          name: 'workouts'
+        })
       } catch (error ) {
-        // this.error = error.response.data.error
         this.error = error.response.data.error
         this.loading1 = false
+        this.$q.notify({
+          message: `${this.error}`,
+          color: 'negative',
+          timeout: 0,
+          actions: [{ icon: 'close', color: 'white' }]
+        })
       }
-  },
-  // watch: {
-  //   }
-}
+    }
+  }
 }
 </script>
 

@@ -4,18 +4,15 @@
     <q-header elevated>
       <q-toolbar style="background:linear-gradient(to right, #EACFCC 60%, #a1c4fd 100%)">
         <q-btn
-          flat
-          dense
-          round
+          flat dense round
           @click="leftDrawerOpen = !leftDrawerOpen"
-          icon="menu"
-          aria-label="Menu"
-          class="text-accent"
-        />
+          icon="menu" aria-label="Menu" class="text-accent" />
+        
         <q-separator vertical inset />
         <q-avatar class="q-ml-sm">
           <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
         </q-avatar>
+        
         <q-btn class="text-body1" stretch flat style="width:215px">
           <div class="row items-center no-wrap">
             <div class="text-center">
@@ -23,12 +20,7 @@
             </div>
           </div>
         </q-btn>
-        <!-- <q-toolbar-title class="text-accent">
-          AV Fit App
-        </q-toolbar-title> -->
-        <!-- <q-item>Login</q-item>
-        <q-button class="q-btn q-btn-item no-outline" /> -->
-        <!-- <div>Quasar v{{ $q.version }}</div> -->
+        
         <q-separator vertical inset />
         <q-tabs indicator-color="primary" align="center" v-model="tab1" class="fit text-body1" text-color="white">
             <q-route-tab name="home" label="Home" to="/" />
@@ -36,10 +28,16 @@
             <q-route-tab name="nutrition" label="Nutrition" to="/" />
         </q-tabs>
             <q-space />
+        
         <q-separator vertical inset />
         <!-- <q-btn stretch flat label="Login" class="text-body2" text-color="white" /> -->
-        <q-tabs indicator-color="primary" class="text-body1" text-color="white">
-          <q-route-tab name="login" label="Login" to="/login" />
+        <q-tabs indicator-color="primary" class="text-body1 no-wrap" text-color="white">
+          <q-route-tab v-if="!$store.state.isUserLoggedIn"
+            name="login" label="Login" to="/login" />
+          <q-route-tab v-if="!$store.state.isUserLoggedIn"
+            name="register" label="Register" to="/register" />
+          <q-route-tab v-if="$store.state.isUserLoggedIn"
+            name="logout" icon="power_settings_new" label="Logout" to="/login" @click.native="logout" />
         </q-tabs>
 
       </q-toolbar>
@@ -63,11 +61,8 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
-      :width="250"
-      :breakpoint="767"
-      bordered
-      content-class="bg-pink-1"
-    >
+      :width="250" :breakpoint="767"
+      bordered content-class="bg-pink-1">
       <q-list>
         <q-item-label header>Essential Links</q-item-label>
         <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
@@ -85,6 +80,7 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
   </q-layout>
 </template>
 
@@ -96,7 +92,24 @@ export default {
     return {
       leftDrawerOpen: false,
       tab1: 'home',
+      error: null
     };
+  },
+  methods: {
+    async logout () {
+      try {
+        this.$store.dispatch('setToken', null)
+        this.$store.dispatch('setUser', null)
+      } catch (error) {
+        this.error = error.response.data.error
+        this.$q.notify({
+          message: `${this.error}`,
+          color: 'negative',
+          timeout: 0,
+          actions: [{ icon: 'close', color: 'white' }]
+        })
+      }
+    }
   }
 };
 </script>

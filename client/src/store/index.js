@@ -2,8 +2,6 @@ import Vue from "vue";
 import Vuex from "vuex";
 // import createPersistedState from "vuex-persistedstate"
 
-import login from "./login";
-
 // import example from './module-example'
 
 Vue.use(Vuex);
@@ -15,10 +13,36 @@ Vue.use(Vuex);
 
 export default function(/* { ssrContext } */) {
   const Store = new Vuex.Store({
-    modules: {
-      // example
-      login
+    state: {
+      token: null,
+      user: null,
+      isUserLoggedIn: false
     },
+    mutations: {
+      setToken(state, token) {
+        Vue.set(this.state, "token", token);
+        if (token) {
+          Vue.set(this.state, "isUserLoggedIn", true);
+        } else {
+          Vue.set(this.state, "isUserLoggedIn", false);
+        }
+      },
+      setUser(state, user) {
+        state.user = user;
+      }
+    },
+    actions: {
+      setToken({ commit }, token) {
+        commit("setToken", token);
+      },
+      setUser({ commit }, user) {
+        commit("setUser", user);
+      }
+    },
+    // modules: {
+    // example
+    // login
+    // },
     //plugins: [
     // createPersistedState()
     // ]
