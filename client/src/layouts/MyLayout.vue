@@ -1,4 +1,3 @@
-/* eslint-disable */
 <template>
   <q-layout view="hHh Lpr fFf" container style="height: 400px" class="shadow-2 rounded-borders">
     <q-header elevated>

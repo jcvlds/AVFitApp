@@ -1,4 +1,3 @@
-/* eslint-disable */
 <template>
   <q-page class="">
     <h5 class="text-accent">Register</h5>

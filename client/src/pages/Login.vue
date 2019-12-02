@@ -1,4 +1,3 @@
-/* eslint-disable */
 <template>
   <q-page class="fit column justify-start items-center">
       <div class="col-9 text-center" style="overflow: auto;min-width: 200px; max-width: 200px;">

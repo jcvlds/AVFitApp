@@ -79,7 +79,7 @@ module.exports = function (ctx) {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /node_modules/,
+          exclude: /node_modules|quasar/,
           options: {
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
           }
