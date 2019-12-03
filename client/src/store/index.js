@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-// import createPersistedState from "vuex-persistedstate"
+import createPersistedState from "vuex-persistedstate"
 
 // import example from './module-example'
 
@@ -43,9 +43,9 @@ export default function(/* { ssrContext } */) {
     // example
     // login
     // },
-    //plugins: [
-    // createPersistedState()
-    // ]
+    plugins: [
+     createPersistedState()
+    ],
 
     // enable strict mode (adds overhead!)
     // for dev mode only

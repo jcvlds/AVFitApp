@@ -3,7 +3,7 @@
   <!-- <q-page class="flex flex-center"> -->
 
     <div class="fit col-12">
-      <h5 class="text-accent q-mb-lg">Welcome {{ user.username }},</h5>
+      <h5 class="text-accent q-mb-lg">Account Info</h5>
     </div>
     
     <img class="absolute-center" alt="Quasar logo" src="~assets/quasar-logo-full.svg" />
@@ -13,13 +13,10 @@
 
 <script>
 export default {
-  name: "PageIndex",
+  name: "AccountInfo",
   data() {
     return {
-      user: {
-        username: 'Ana'
       }
     }
-  }
 };
 </script>

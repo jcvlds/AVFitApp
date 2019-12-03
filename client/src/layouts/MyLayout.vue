@@ -1,7 +1,8 @@
 <template>
-  <q-layout view="hHh Lpr fFf" container style="height: 400px" class="shadow-2 rounded-borders">
+  <q-layout view="hHh Lpr fFf" container style="height: 100vh"
+    class="shadow-2 rounded-borders">
     <q-header elevated>
-      <q-toolbar style="background:linear-gradient(to right, #EACFCC 60%, #a1c4fd 100%)">
+      <q-toolbar style="background:linear-gradient(to right, #EACFCC 55%, #B7A29F 100%)">
         <q-btn
           flat dense round
           @click="leftDrawerOpen = !leftDrawerOpen"
@@ -21,10 +22,11 @@
         </q-btn>
         
         <q-separator vertical inset />
-        <q-tabs indicator-color="primary" align="center" v-model="tab1" class="fit text-body1" text-color="white">
+        <q-tabs indicator-color="primary" align="center" v-model="tab1" class="fit text-body1 gt-xs" text-color="white">
             <q-route-tab name="home" label="Home" to="/" />
-            <q-route-tab name="workouts" label="Workouts" to="/" />
-            <q-route-tab name="nutrition" label="Nutrition" to="/" />
+            <q-route-tab name="workouts" label="Workouts" to="/workouts" />
+            <q-route-tab name="nutrition" label="Nutrition" to="/nutrition" />
+            <q-route-tab name="check-in" label="Check-In" to="/check-in" />
         </q-tabs>
             <q-space />
         
@@ -51,8 +53,12 @@
             align="justify"
             class="text-white">
             <q-route-tab class="" name="home" icon="home" label="Home" to="/" />
-            <q-route-tab class="" name="workouts" icon="alarm" label="Workouts" to="/" />
-            <q-route-tab class="" name="nutrition" icon="movie" label="Nutrition" to="/" />
+            <q-separator vertical inset />
+            <q-route-tab class="" name="workouts" icon="assignment" label="Workouts" to="/workouts" />
+            <q-separator vertical inset />
+            <q-route-tab class="" name="nutrition" icon="calendar_today" label="Nutrition" to="/nutrition" />
+            <q-separator vertical inset />
+            <q-route-tab class="" name="check-in" icon="check" label="Check-In" to="/check-in" />
           </q-tabs>
         </div>
       </div>
@@ -61,16 +67,25 @@
     <q-drawer
       v-model="leftDrawerOpen"
       :width="250" :breakpoint="767"
-      bordered content-class="bg-pink-1">
+      bordered content-class="bg-brandlight">
       <q-list>
-        <q-item-label header>Essential Links</q-item-label>
-        <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
+        <q-item-label header>Account Settings</q-item-label>
+        <q-item class="text-accent" clickable to="/account-info">
           <q-item-section avatar>
-            <q-icon name="school" />
+            <q-icon name="account_circle" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Docs</q-item-label>
-            <q-item-label caption>quasar.dev</q-item-label>
+            <q-item-label>Account Info</q-item-label>
+            <!-- <q-item-label caption>Update email</q-item-label> -->
+          </q-item-section>
+        </q-item>
+
+        <q-item clickable class="text-accent" to="/body-stats">
+          <q-item-section avatar>
+            <q-icon name="accessibility" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Body Stats</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>

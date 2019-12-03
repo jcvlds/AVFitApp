@@ -1,17 +1,17 @@
 <template>
   <q-page class="fit column justify-start items-center">
-      <div class="col-9 text-center" style="overflow: auto;min-width: 200px; max-width: 200px;">
-        <!-- <h5 class="text-center text-accent">Login</h5> -->
-        <h5 class="text-accent">Login</h5>
-        <q-form @submit="login" class="q-gutter-md">
-          <q-input class="" rounded outlined v-model="username" placeholder="Username" dense />
-          <q-input class="" rounded outlined v-model="password" placeholder="Password" dense type="password" />
-          <q-btn type="submit" :loading="loading1" icon="exit_to_app" outline rounded color="accent" label="Login" class="q-px-lg shadow-2"/>
-        </q-form>
-      </div>
-      <div v-show="error" class="text-red text-center block q-mt-sm">
-        {{ error }}
-      </div>
+    <div class="col-9 text-center" style="overflow: auto;min-width: 200px; max-width: 200px;">
+      <!-- <h5 class="text-center text-accent">Login</h5> -->
+      <h5 class="text-accent">Login</h5>
+      <q-form @submit="login" class="q-gutter-md">
+        <q-input class="" rounded outlined v-model="username" placeholder="Username" dense />
+        <q-input class="" rounded outlined v-model="password" placeholder="Password" dense type="password" />
+        <q-btn type="submit" :loading="loading1" icon="exit_to_app" outline rounded color="accent" label="Login" class="q-px-lg shadow-2"/>
+      </q-form>
+    </div>
+    <!-- <div v-show="error" class="text-red text-center block q-mt-sm">
+      {{ error }}
+    </div> -->
   </q-page>
 </template>
 
@@ -30,9 +30,7 @@ export default {
   methods: {
     async login () {
       this.loading1 = true
-      console.log(this.loading1)
       try {
-        console.log("login button was clicked", this.username, this.password);
         const response = await AuthenticationService.login({
         username: this.username,
         password: this.password

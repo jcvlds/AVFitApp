@@ -1,11 +1,15 @@
 <template>
   <q-page class="flex flex-center">
-    <h1 class="text-accent">Workouts</h1>
+    <h1 class="text-accent">Nutrition</h1>
   </q-page>
 </template>
 
 <script>
 export default {
-  name: "Workouts"
-};
+  name: "Nutrition"
+}
 </script>
+
+<style scoled>
+
+</style>

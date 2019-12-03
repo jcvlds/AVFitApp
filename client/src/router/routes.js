@@ -1,27 +1,43 @@
 const routes = [
   {
     path: "/",
-    name: "home",
     component: () => import("layouts/MyLayout.vue"),
-    children: [{ path: "", component: () => import("pages/Index.vue") }]
+    children: [{ path: "", name: "home", component: () => import("pages/Index.vue") }]
   },
   {
     path: "/register",
-    name: "register",
     component: () => import("layouts/MyLayout.vue"),
-    children: [{ path: "", component: () => import("pages/Register.vue") }]
+    children: [{ path: "", name: "register", component: () => import("pages/Register.vue") }]
   },
   {
     path: "/login",
-    name: "login",
     component: () => import("layouts/MyLayout.vue"),
-    children: [{ path: "", component: () => import("pages/Login.vue") }]
+    children: [{ path: "", name: "login", component: () => import("pages/Login.vue") }]
   },
   {
     path: "/workouts",
-    name: "workouts",
     component: () => import("layouts/MyLayout.vue"),
-    children: [{ path: "", component: () => import("pages/Workouts.vue") }]
+    children: [{ path: "", name: "workouts", component: () => import("pages/Workouts.vue") }]
+  },
+  {
+    path: "/nutrition",
+    component: () => import("layouts/MyLayout.vue"),
+    children: [{ path: "", name: "nutrition", component: () => import("pages/Nutrition.vue") }]
+  },
+  {
+    path: "/check-in",
+    component: () => import("layouts/MyLayout.vue"),
+    children: [{ path: "", name: "check-in", component: () => import("pages/Check-in.vue") }]
+  },
+  {
+    path: "/account-info",
+    component: () => import("layouts/MyLayout.vue"),
+    children: [{ path: "", name: "account-info", component: () => import("pages/AccountInfo.vue") }]
+  },
+  {
+    path: "/body-stats",
+    component: () => import("layouts/MyLayout.vue"),
+    children: [{ path: "", name: "body-stats", component: () => import("pages/BodyStats.vue") }]
   },
   {
     path: "/user",
