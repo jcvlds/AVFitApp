@@ -13,14 +13,14 @@
       <div class="col-4">
         <q-item-label header class="text-grey-9">Average Weight last week: </q-item-label>
       </div>
-      <div class="col-8">
-        <q-input class="" rounded standout :dense="dense" readonly style="max-width:200px" />
+      <div class="col-8" style="">
+        <q-input class="" rounded standout :dense="dense" readonly style="max-width:200px;" />
       </div>
     </div>
 
-    <div class="fit col-12">
+    <div class="fit col-12 q-pt-md">
       <q-item-label header class="text-grey-9">This Week: <span style="font-style: italic;">enter your weight log below!</span></q-item-label>
-      <q-markup-table flat bordered class="">
+      <q-markup-table :separator="separator" flat bordered class="">
       <thead class="">
         <tr class="text-deep-purple-7">
           <th class="text-center">Mon</th>
@@ -28,7 +28,6 @@
           <th class="text-center">Wed</th>
           <th class="text-center">Thurs</th>
           <th class="text-center">Fri</th>
-          <th />
         </tr>
       </thead>
       <tbody>
@@ -64,7 +63,6 @@
               <q-input placeholder="Edit the weight" v-model="fridayWeight" dense autofocus counter />
             </q-popup-edit>
           </td>
-          <td class="text-center"></td>
         </tr>
       </tbody>
       </q-markup-table>
@@ -119,6 +117,7 @@ export default {
   data() {
     return {
       loading1: false,
+      separator: "vertical",
       mondayWeight: "-",
       tuesdayWeight: "-",
       wednesdayWeight: "-",
