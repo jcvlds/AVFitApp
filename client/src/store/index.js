@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate"
+import SecureLS from "secure-ls"
+var ls = new SecureLS({ isCompression: false })
 
 // import example from './module-example'
 
@@ -45,7 +47,13 @@ const Store = new Vuex.Store({
   // login
   // },
   plugins: [
-   createPersistedState()
+   createPersistedState({
+     storage: {
+       getItem: key => ls.get(key),
+       setItem: (key, value) => ls.set(key, value),
+       removeItem: key => ls.remove(key)
+     }
+   })
   ],
 
   // enable strict mode (adds overhead!)

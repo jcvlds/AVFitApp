@@ -14,7 +14,7 @@
         <q-item-label header class="text-grey-9">Average Weight last week: </q-item-label>
       </div>
       <div class="col-8" style="">
-        <q-input class="" rounded standout :dense="dense" readonly style="max-width:200px;" />
+        <q-input class="" rounded standout readonly style="max-width:200px;" />
       </div>
     </div>
 

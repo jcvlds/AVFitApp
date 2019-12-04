@@ -18,6 +18,7 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
     "quasar": "^1.0.0",
+    "secure-ls": "^1.2.5",
     "vuex-persistedstate": "^2.7.0",
     "vuex-router-sync": "^5.0.0"
   },
