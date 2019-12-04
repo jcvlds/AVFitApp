@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import Api from "./../services/Api";
 export default {
   name: "PageIndex",
   data() {
@@ -20,6 +21,8 @@ export default {
         username: 'Ana'
       }
     }
-  }
+  },
+  methods: {
+}
 };
 </script>

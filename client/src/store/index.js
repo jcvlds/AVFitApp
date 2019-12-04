@@ -11,46 +11,49 @@ Vue.use(Vuex);
  * directly export the Store instantiation
  */
 
-export default function(/* { ssrContext } */) {
-  const Store = new Vuex.Store({
-    state: {
-      token: null,
-      user: null,
-      isUserLoggedIn: false
-    },
-    mutations: {
-      setToken(state, token) {
-        Vue.set(this.state, "token", token);
-        if (token) {
-          Vue.set(this.state, "isUserLoggedIn", true);
-        } else {
-          Vue.set(this.state, "isUserLoggedIn", false);
-        }
-      },
-      setUser(state, user) {
-        state.user = user;
+const Store = new Vuex.Store({
+  state: {
+    token: null,
+    user: null,
+    isUserLoggedIn: false
+  },
+  mutations: {
+    setToken(state, token) {
+      Vue.set(this.state, "token", token);
+      if (token) {
+        Vue.set(this.state, "isUserLoggedIn", true);
+        // const token = localStorage.getItem('token');
+        // Vue.prototype.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      } else {
+        Vue.set(this.state, "isUserLoggedIn", false);
       }
     },
-    actions: {
-      setToken({ commit }, token) {
-        commit("setToken", token);
-      },
-      setUser({ commit }, user) {
-        commit("setUser", user);
-      }
+    setUser(state, user) {
+      state.user = user;
+    }
+  },
+  actions: {
+    setToken({ commit }, token) {
+      commit("setToken", token);
     },
-    // modules: {
-    // example
-    // login
-    // },
-    plugins: [
-     createPersistedState()
-    ],
+    setUser({ commit }, user) {
+      commit("setUser", user);
+    }
+  },
+  // modules: {
+  // example
+  // login
+  // },
+  plugins: [
+   createPersistedState()
+  ],
 
-    // enable strict mode (adds overhead!)
-    // for dev mode only
-    strict: process.env.DEV
-  });
+  // enable strict mode (adds overhead!)
+  // for dev mode only
+  strict: process.env.DEV
+});
+export default function(/* { ssrContext } */) {
 
   return Store;
 }
+export { Store }

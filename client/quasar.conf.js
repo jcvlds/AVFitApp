@@ -9,6 +9,7 @@ module.exports = function (ctx) {
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
       'axios',
+      'devtools',
       {
         server: false, // run on client-side only!
         path: 'vuex-router-sync' // references /src/boot/<name>.js

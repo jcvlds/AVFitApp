@@ -31,19 +31,22 @@ export default {
     async login () {
       this.loading1 = true
       try {
+        // console.log('test')
         const response = await AuthenticationService.login({
         username: this.username,
         password: this.password
         })
         // console.log(response.data);
         this.$store.dispatch('setToken', { token: response.data.token })
-        this.$store.dispatch('setUser', response.data.user.username)
+        this.$store.dispatch('setUser', response.data.userInfo.username)
+        // this.$axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
         this.loading1 = false
         this.$router.push({
           name: 'workouts'
         })
-      } catch (error ) {
-        this.error = error.response.data.error
+      } catch (err) {
+        // console.log(err)
+        this.error = err.response.data.error
         this.loading1 = false
         this.$q.notify({
           message: `${this.error}`,
