@@ -12,6 +12,8 @@ app.use(cors())
 
 // require('./db/db')
 
+require('./passport')
+
 require('./routes')(app)
 
 app.set('port', config.port)

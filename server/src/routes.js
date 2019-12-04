@@ -1,5 +1,7 @@
 const AuthenticationController = require('./controllers/AuthenticationController')
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
+const isAuthenticated = require('./policies/isAuthenticated')
+const MembersController = require('./controllers/MembersController')
 
 module.exports = (app) => {
   app.post('/registerUser',
@@ -8,6 +10,16 @@ module.exports = (app) => {
 
   app.post('/login',
     AuthenticationController.authenticate)
+
+  app.get('/', (req, res) => {
+    res.status(200).send({
+      success: true
+    })
+  })
+
+  app.get('/members',
+    isAuthenticated,
+    MembersController.index)
 
   // app.post('/createUser',
   // (req, res) => {

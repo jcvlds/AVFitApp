@@ -86,6 +86,7 @@ module.exports = {
   },
   async authenticate (req, res) {
     console.log(`Authenticating ${req.body.username}`)
+    console.log(req.body)
     const { username, password } = req.body
     try {
       return knex('users').where({ username })
@@ -108,13 +109,15 @@ module.exports = {
             } else {
               res.status(200).send({
                 // success: hash === user.encrypted_password,
-                user: {
+                userInfo: {
+                  id: user.id,
                   username: user.username,
                   email: user.email
                 },
                 token: jwtSignUser({ user }),
                 message: `Hello ${user.username}! You are logged in!`
               })
+              // res.cookie('jwt', jwt, { httpOnly: true, secure: true })
             }
           }
         })
