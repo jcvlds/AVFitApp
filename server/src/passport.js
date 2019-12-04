@@ -23,7 +23,7 @@ passport.use(new JwtStrategy({
         username: 'users.username'
       })
       // .where({ id: jwtPayload.id })
-      .where({ username: jwtPayload.user.username })
+      .where({ id: jwtPayload.userInfo.id })
       .then(([user]) => {
         if (user) {
         // if (user.username === username) {

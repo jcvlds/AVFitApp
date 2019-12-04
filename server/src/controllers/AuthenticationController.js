@@ -107,14 +107,17 @@ module.exports = {
                 error: 'The password was incorrect'
               })
             } else {
+              const userInfo = {
+                id: user.id
+              }
               res.status(200).send({
                 // success: hash === user.encrypted_password,
-                userInfo: {
-                  id: user.id,
-                  username: user.username,
-                  email: user.email
-                },
-                token: jwtSignUser({ user }),
+                // userInfo: {
+                //   id: user.id
+                //   username: user.username,
+                //   email: user.email
+                // },
+                token: jwtSignUser({ userInfo }),
                 message: `Hello ${user.username}! You are logged in!`
               })
               // res.cookie('jwt', jwt, { httpOnly: true, secure: true })
