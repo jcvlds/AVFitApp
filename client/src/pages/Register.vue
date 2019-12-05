@@ -13,7 +13,7 @@
             :delay="2000">
       <h5 class="text-accent">Register</h5>
             <q-form @submit="register" class="q-gutter-md text-center">
-              <q-input class="" rounded outlined v-model="username" placeholder="Username" dense type="text" />
+              <q-input autofocus class="" rounded outlined v-model="username" placeholder="Username" dense type="text" />
               <q-input class="" rounded outlined v-model="email" placeholder="Email" dense type="text" />
               <q-input class="" rounded outlined v-model="password" placeholder="Password" dense type="password" />
               <q-input class="" rounded outlined v-model="repeat_password" placeholder="Repeat Password" dense type="password" />

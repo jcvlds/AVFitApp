@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh Lpr fFf" container style="height: 100vh"
-    class="shadow-2 rounded-borders">
+    class="shadow-2 rounded-borders no-scroll">
     <q-header elevated>
       <q-toolbar style="background:linear-gradient(to right, #EACFCC 55%, #B7A29F 100%)">
         <q-btn

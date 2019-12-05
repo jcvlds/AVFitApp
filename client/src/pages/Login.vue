@@ -4,9 +4,12 @@
       <!-- <h5 class="text-center text-accent">Login</h5> -->
       <h5 class="text-accent">Login</h5>
       <q-form @submit="login" class="q-gutter-md">
-        <q-input class="" rounded outlined v-model="username" placeholder="Username" dense />
-        <q-input class="" rounded outlined v-model="password" placeholder="Password" dense type="password" />
-        <q-btn type="submit" :loading="loading1" icon="exit_to_app" outline rounded color="accent" label="Login" class="q-px-lg shadow-2"/>
+        <q-input class="" :rules="[val => !!val || 'Field is required']" ref="name"
+          rounded outlined v-model="username" placeholder="Username" autofocus dense />
+        <q-input class="" :rules="[val => !!val || 'Field is required']" ref="name"
+          rounded outlined v-model="password" placeholder="Password" dense type="password" />
+        <q-btn type="submit"
+          :loading="loading1" icon="exit_to_app" outline rounded color="accent" label="Login" class="q-px-lg shadow-2"/>
       </q-form>
     </div>
     <!-- <div v-show="error" class="text-red text-center block q-mt-sm">
@@ -29,6 +32,8 @@ export default {
   },
   methods: {
     async login () {
+      // this.$refs.name.validate()
+      // console.log(this.$refs.name)
       this.loading1 = true
       try {
         // console.log('test')
