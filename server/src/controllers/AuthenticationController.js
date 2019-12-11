@@ -15,7 +15,7 @@ module.exports = {
   // async registerUser ({ username, password }) {
   saltHashPassword,
   async registerUser (req, res) {
-    const { username, email, password } = req.body
+    const { name, username, email, password } = req.body
     // console.log(`Add user ${req.body.username} with password ${req.body.password}`)
 
     const { salt, hash } = saltHashPassword({ password })
@@ -46,6 +46,7 @@ module.exports = {
               .insert({
                 salt,
                 encrypted_password: hash,
+                name,
                 username,
                 email
               })
@@ -54,8 +55,7 @@ module.exports = {
                 return knex('users')
                   .select({
                     id: 'users.id',
-                    username: 'users.username',
-                    email: 'users.email'
+                    name: 'users.name'
                   })
                   .where({ id, username })
                   .then(([user]) => {
@@ -68,7 +68,7 @@ module.exports = {
                       // username: req.body.username,
                       // email: req.body.email,
                       // password: req.body.password,
-                        user: user,
+                        userInfo: user,
                         token: jwtSignUser({ user }),
                         message: 'Registered user successfully!'
                       })
@@ -108,7 +108,8 @@ module.exports = {
               })
             } else {
               const userInfo = {
-                id: user.id
+                id: user.id,
+                name: user.name
               }
               res.status(200).send({
                 // success: hash === user.encrypted_password,
@@ -117,6 +118,7 @@ module.exports = {
                 //   username: user.username,
                 //   email: user.email
                 // },
+                userInfo,
                 token: jwtSignUser({ userInfo }),
                 message: `Hello ${user.username}! You are logged in!`
               })
