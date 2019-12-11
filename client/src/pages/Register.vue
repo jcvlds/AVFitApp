@@ -13,7 +13,8 @@
             :delay="2000">
       <h5 class="text-accent">Register</h5>
             <q-form @submit="register" class="q-gutter-md text-center">
-              <q-input autofocus class="" rounded outlined v-model="username" placeholder="Username" dense type="text" />
+              <q-input autofocus class="" rounded outlined v-model="name" placeholder="First name" dense type="text" />
+              <q-input class="" rounded outlined v-model="username" placeholder="Username" dense type="text" />
               <q-input class="" rounded outlined v-model="email" placeholder="Email" dense type="text" />
               <q-input class="" rounded outlined v-model="password" placeholder="Password" dense type="password" />
               <q-input class="" rounded outlined v-model="repeat_password" placeholder="Repeat Password" dense type="password" />
@@ -33,6 +34,7 @@ export default {
   name: "Register",
   data() {
     return {
+      name: "",
       username: "",
       email: "",
       password: "",
@@ -47,6 +49,7 @@ export default {
       try {
         console.log("register button was clicked", this.password);
         const response = await AuthenticationService.registerUser({
+        name: this.name,
         username: this.username,
         email: this.email,
         password: this.password,
@@ -56,7 +59,8 @@ export default {
         this.loading1 = false
         // console.log(response.data.token)
         this.$store.dispatch('setToken', { token: response.data.token })
-        this.$store.dispatch('setUser', response.data.user.username)
+        // this.$store.dispatch('setUser', response.data.userInfo.name)
+        this.$store.dispatch('setUser', response.data.userInfo)
         this.$router.push({
           name: 'workouts'
         })

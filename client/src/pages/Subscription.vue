@@ -3,7 +3,7 @@
     <div class="fit q-gutter-y-md">
       
       <div>
-        <h5 class="q-my-none text-accent q-mb-lg">Body Stats</h5>
+        <h5 class="q-my-none text-accent q-mb-lg">Subscription &amp; Payment</h5>
       </div>
       
       <div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "BodyStats",
+  name: "Subscription",
   data() {
     return {
       }

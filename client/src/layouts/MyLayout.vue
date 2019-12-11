@@ -70,6 +70,7 @@
       bordered content-class="bg-brandlight">
       <q-list>
         <q-item-label header>Account Settings</q-item-label>
+
         <q-item class="text-accent" clickable to="/account-info">
           <q-item-section avatar>
             <q-icon name="account_circle" />
@@ -88,6 +89,16 @@
             <q-item-label>Body Stats</q-item-label>
           </q-item-section>
         </q-item>
+
+        <q-item clickable class="text-accent" to="/subscription">
+          <q-item-section avatar>
+            <q-icon name="payment" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Subscription &amp; Payment</q-item-label>
+          </q-item-section>
+        </q-item>
+
       </q-list>
     </q-drawer>
 

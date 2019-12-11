@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store, { Store } from '../store/index'
 
 import routes from "./routes";
 
@@ -23,8 +24,25 @@ export default function(/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE
   });
 
+  Router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      if (!Store.state.isUserLoggedIn) {
+        // console.log(to)
+        next({
+          path: '/login',
+          query: { redirect: to.fullPath }
+        });
+      } else {
+        next()
+      }
+    } else {
+      next()
+    }
+  });
+
   return Router;
 }
+
 
 //export default new Router({
 // routes: [

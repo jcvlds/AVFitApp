@@ -44,11 +44,13 @@ export default {
         // console.log(response.data);
         this.$store.dispatch('setToken', { token: response.data.token })
         // this.$store.dispatch('setUser', response.data.userInfo.username)
-        this.$store.dispatch('setUser', this.username)
+        // this.$store.dispatch('setUser', this.username)
+        // this.$store.dispatch('setUser', response.data.userInfo.name)
+        this.$store.dispatch('setUser', response.data.userInfo)
         // this.$axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
         this.loading1 = false
         this.$router.push({
-          name: 'workouts'
+          name: 'home'
         })
       } catch (err) {
         // console.log(err)

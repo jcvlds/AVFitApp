@@ -2,7 +2,10 @@ const routes = [
   {
     path: "/",
     component: () => import("layouts/MyLayout.vue"),
-    children: [{ path: "", name: "home", component: () => import("pages/Index.vue") }]
+    children: [{ path: "", name: "home", component: () => import("pages/Index.vue") }],
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/register",
@@ -17,27 +20,50 @@ const routes = [
   {
     path: "/workouts",
     component: () => import("layouts/MyLayout.vue"),
-    children: [{ path: "", name: "workouts", component: () => import("pages/Workouts.vue") }]
+    children: [{ path: "", name: "workouts", component: () => import("pages/Workouts.vue") }],
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/nutrition",
     component: () => import("layouts/MyLayout.vue"),
-    children: [{ path: "", name: "nutrition", component: () => import("pages/Nutrition.vue") }]
+    children: [{ path: "", name: "nutrition", component: () => import("pages/Nutrition.vue") }],
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/check-in",
     component: () => import("layouts/MyLayout.vue"),
-    children: [{ path: "", name: "check-in", component: () => import("pages/Check-in.vue") }]
+    children: [{ path: "", name: "check-in", component: () => import("pages/Check-in.vue") }],
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/account-info",
     component: () => import("layouts/MyLayout.vue"),
-    children: [{ path: "", name: "account-info", component: () => import("pages/AccountInfo.vue") }]
+    children: [{ path: "", name: "account-info", component: () => import("pages/AccountInfo.vue") }],
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/body-stats",
     component: () => import("layouts/MyLayout.vue"),
-    children: [{ path: "", name: "body-stats", component: () => import("pages/BodyStats.vue") }]
+    children: [{ path: "", name: "body-stats", component: () => import("pages/BodyStats.vue") }],
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/subscription",
+    component: () => import("layouts/MyLayout.vue"),
+    children: [{ path: "", name: "subscription", component: () => import("pages/Subscription.vue") }],
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/user",

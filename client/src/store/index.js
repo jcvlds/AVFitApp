@@ -17,6 +17,7 @@ const Store = new Vuex.Store({
   state: {
     token: null,
     user: null,
+    id: null,
     isUserLoggedIn: false
   },
   mutations: {
@@ -30,16 +31,17 @@ const Store = new Vuex.Store({
         Vue.set(this.state, "isUserLoggedIn", false);
       }
     },
-    setUser(state, user) {
-      state.user = user;
+    setUser(state, userInfo) {
+      state.user = userInfo.name;
+      state.id = userInfo.id;
     }
   },
   actions: {
     setToken({ commit }, token) {
       commit("setToken", token);
     },
-    setUser({ commit }, user) {
-      commit("setUser", user);
+    setUser({ commit }, userInfo) {
+      commit("setUser", userInfo);
     }
   },
   // modules: {

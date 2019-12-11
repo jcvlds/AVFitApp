@@ -1,7 +1,7 @@
 <template>
   <!-- <q-page class="fit row" style="padding-right: 05vw; padding-left: 05vw; padding-bottom: 05vw"> -->
     <!-- <div class="col text-center" style="overflow: auto;min-width: 200px; max-width: 90vh;"> -->
-  <q-page class="fit row" style="padding-right: 05vw; padding-left: 05vw; padding-bottom: 05vw">
+  <q-page class="fit row" style="padding-right: 05vw; padding-left: 05vw; padding-bottom: 05vh; padding-top: 10vh">
 
     <div class="col" style="overflow: auto;min-width: 100%">
         <q-scroll-area class="fit round-borders shadow-2"
@@ -14,7 +14,7 @@
           }"
           :delay="2000">
           <div class="fit col-12 q-mb-lg">
-            <h5 class="text-accent q-mb-lg">Check-In</h5>
+            <h5 class="text-accent q-mt-none q-mb-lg">{{ user }}'s Check-In </h5>
           </div>
 
           <div class="fit row">
@@ -33,7 +33,7 @@
             <q-item-label header class="text-grey-9">This Week: <span style="font-style: italic;">enter your weight log below!</span></q-item-label>
             <q-markup-table :separator="separator" flat bordered class="">
             <thead class="">
-              <tr class="text-deep-purple-7">
+              <tr class="text-white bg-accent">
                 <th class="text-center">Mon</th>
                 <th class="text-center">Tues</th>
                 <th class="text-center">Wed</th>
@@ -46,31 +46,35 @@
                 <td class="text-center">
                   {{ mondayWeight }}
                   <q-popup-edit v-model="mondayWeight" title="Monday" 
-                    buttons persistent label-set="Save" label-cancel="Close" :content-style="{ color: '#5E35B1' }" color="accent">
+                    buttons persistent label-set="Save" label-cancel="Close" :content-style="{ color: '#e88c82' }" color="accent">
                     <q-input placeholder="Edit the weight" v-model="mondayWeight" dense autofocus counter />
                   </q-popup-edit>
                 </td>
                 <td class="text-center">
                   {{ tuesdayWeight }}
-                  <q-popup-edit v-model="tuesdayWeight" title="Tuesday">
+                  <q-popup-edit v-model="tuesdayWeight" title="Tuesday"
+                    buttons persistent label-set="Save" label-cancel="Close" :content-style="{ color: '#e88c82' }" color="accent">>
                     <q-input placeholder="Edit the weight" v-model="tuesdayWeight" dense autofocus counter />
                   </q-popup-edit>
                   </td>
                 <td class="text-center">
                   {{ wednesdayWeight }}
-                  <q-popup-edit v-model="wednesdayWeight" title="Wednesday">
+                  <q-popup-edit v-model="wednesdayWeight" title="Wednesday"
+                    buttons persistent label-set="Save" label-cancel="Close" :content-style="{ color: '#e88c82' }" color="accent">>
                     <q-input placeholder="Edit the weight" v-model="wednesdayWeight" dense autofocus counter />
                   </q-popup-edit>
                 </td>
                 <td class="text-center">
                   {{ thursdayWeight }}
-                  <q-popup-edit v-model="thursdayWeight" title="Thursday">
+                  <q-popup-edit v-model="thursdayWeight" title="Thursday"
+                    buttons persistent label-set="Save" label-cancel="Close" :content-style="{ color: '#e88c82' }" color="accent">>
                     <q-input placeholder="Edit the weight" v-model="thursdayWeight" dense autofocus counter />
                   </q-popup-edit>
                 </td>
                 <td class="text-center">
                   {{ fridayWeight }}
-                  <q-popup-edit v-model="fridayWeight" title="Friday">
+                  <q-popup-edit v-model="fridayWeight" title="Friday"
+                    buttons persistent label-set="Save" label-cancel="Close" :content-style="{ color: '#e88c82' }" color="accent">>
                     <q-input placeholder="Edit the weight" v-model="fridayWeight" dense autofocus counter />
                   </q-popup-edit>
                 </td>
@@ -131,6 +135,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: "Check-in",
   props: [],
@@ -147,46 +152,51 @@ export default {
       questions: [
         {
           no: 1,
-          question: 'How did you feel about the time during this week?...',
+          question: 'Peso de hoy o la ultima vez que te pesaste:',
           answer: ''
         },
         {
           no: 2,
-          question: 'How did you feel about the time during this week?...',
+          question: 'Como te sentiste esta semanan en general?',
           answer: ''
         },
         {
           no: 3,
-          question: 'How did you feel about the time during this week?...',
+          question: 'Cuales fueron las cosas mas faciles de cumplir?',
           answer: ''
         },
         {
           no: 4,
-          question: 'How did you feel about the time during this week?...',
+          question: 'Que fue lo mas dificil del plan?',
           answer: ''
         },
         {
           no: 5,
-          question: 'How did you feel about the time during this week?...',
+          question: 'Que te gustaria cambiar',
           answer: ''
         },
         {
           no: 6,
-          question: 'How did you feel about the time during this week?...',
+          question: 'De que te sientes orgullosa esta semana? (aka what was your win?)',
           answer: ''
         },
         {
           no: 7,
-          question: 'How did you feel about the time during this week?...',
+          question: 'Que sientes que debes mejorar?',
           answer: ''
         },
         {
           no: 8,
-          question: 'How did you feel about the time during this week?...',
+          question: 'Dime dos cosas que amas de ti; una de tu personalidad y otra de tu cuerpo:',
           answer: ''
         }
       ]
   }
+  },
+  computed: {
+    ...mapState([
+      'user'
+    ])
   },
   methods: {
     getIndex(list, no) {
